@@ -2,7 +2,6 @@
 import os
 import time
 import argparse
-import random
 
 import RPi.GPIO as GPIO
 import cv2
@@ -91,6 +90,7 @@ def main():
 
     try:
         while True:
+            # 根據光感應器讀值決定動作
             # advice 是 'left', 'right', 'stop', 'other' 之一
             advice = track_line()
             print('advice', advice)
@@ -108,16 +108,15 @@ def main():
                 forward()
 
             elif advice == 'stall':
-                if random.randint(0, 1):
-                    turn_left()
-                else:
-                    turn_right()
+                turn_left()
 
+            # 拍攝照片並儲存到序列
             ret, image = video_dev.read()
-            images.append((os.path.join(args.data_dir, '%d-%s.jpg' % (time.time() * 1000, advice)), image))
+            images.append((os.path.join(args.data_dir, '%d-%s.jpg' % (time.time(), advice)), image))
 
             print('queue size: %d' % (len(images) + 1))
 
+            # 若序列大小到達限制，停下車，並將序列的照片存入硬碟
             if len(images) == IMAGE_QUEUE_LIMIT:
                 stop()
 
@@ -137,7 +136,7 @@ def main():
     pwm1.stop()
     pwm2.stop()
 
-    # 儲存影像
+    # 將序列的照片存入硬碟
     for path, image in images:
         print('Write %s' % path)
         cv2.imwrite(path, image)

@@ -183,20 +183,20 @@ def main():
     )
 
     # 搜尋所有圖檔
-    match_left =  os.path.join(args.data_dir, 'left', '*.jpg')
-    paths_left = list(glob.glob(match_left))
+    match_left = os.path.join(args.data_dir, 'left', '*.jpg')
+    paths_left = glob.glob(match_left)
 
-    match_right =  os.path.join(args.data_dir, 'right', '*.jpg')
-    paths_right = list(glob.glob(match_right))
+    match_right = os.path.join(args.data_dir, 'right', '*.jpg')
+    paths_right = glob.glob(match_right)
 
-    match_stop =  os.path.join(args.data_dir, 'stop', '*.jpg')
-    paths_stop = list(glob.glob(match_stop))
+    match_stop = os.path.join(args.data_dir, 'stop', '*.jpg')
+    paths_stop = glob.glob(match_stop)
 
-    match_other =  os.path.join(args.data_dir, 'other', '*.jpg')
-    paths_other = list(glob.glob(match_other))
+    match_other = os.path.join(args.data_dir, 'other', '*.jpg')
+    paths_other = glob.glob(match_other)
 
-    match_test =  os.path.join(args.data_dir, 'test', '*.jpg')
-    paths_test = list(glob.glob(match_test))
+    match_test = os.path.join(args.data_dir, 'test', '*.jpg')
+    paths_test = glob.glob(match_test)
 
     n_train = len(paths_left) + len(paths_right) + len(paths_stop) + len(paths_other)
     n_test = len(paths_test)
@@ -264,6 +264,8 @@ def main():
             trainset,
             label,
             epochs=args.epochs,
+            validation_split=0.2,
+            # batch_size=64,
         )
 
     # 儲存模型架構及參數
