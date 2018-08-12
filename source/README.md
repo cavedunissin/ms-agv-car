@@ -36,7 +36,7 @@ data_dir
 # 訓練 64 回合，完成後儲存模型檔於 model.json、儲存模型參數於 weight.h5
 # 將預測結果輸出在 output.txt
 python3 ./train_model.py --model-file model.json \
-                         --weight-file weight.h5 \
+                         --weights-file weight.h5 \
                          --data-dir /path/to/dataset
 ```
 

@@ -120,7 +120,7 @@ def main():
     arg_parser.add_argument(
         '--load-weights',
         action='store_true',
-        help='從 --weight-file 指定的檔案載入模型參數',
+        help='從 --weights-file 指定的檔案載入模型參數',
     )
     args = arg_parser.parse_args()
 
