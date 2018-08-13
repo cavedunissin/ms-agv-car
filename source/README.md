@@ -68,3 +68,11 @@ python3 ./data_collect.py --data-dir my_data/
 python3 ./vehicle_example.py --model-file model.json \
                              --weights-file weights.h5
 ```
+
+## line\_follower.py
+
+軌跡車範例程式，使用光感應器循軌跡行走。
+
+```sh
+./line_follower.py
+```
