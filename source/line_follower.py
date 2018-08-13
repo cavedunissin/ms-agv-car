@@ -29,9 +29,6 @@ def main():
     GPIO.setup(IR_MIDDLE_PIN, GPIO.IN) #GPIO 3 -> Right IR out
     GPIO.setup(IR_LEFT_PIN, GPIO.IN)   #GPIO 4 -> Right IR out
 
-    pwm1.ChangeDutyCycle(DUTY_CYCLE)
-    pwm2.ChangeDutyCycle(DUTY_CYCLE)
-
     def forward():
         pwm1.ChangeDutyCycle(DUTY_CYCLE)
         pwm2.ChangeDutyCycle(DUTY_CYCLE)
