@@ -242,6 +242,8 @@ def main():
                 print('動作:', '左轉')
                 turn_left()
 
+            print()
+
     except KeyboardInterrupt:
         print('使用者中斷')
 
