@@ -75,7 +75,6 @@ def main():
 
     try:
         while True:
-            # advice 是 'left', 'right', 'stop', 'other' 之一
             advice = track_line()
 
             if advice == 'left':
