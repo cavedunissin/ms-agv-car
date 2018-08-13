@@ -103,8 +103,9 @@ def main():
 
 
             print('時間：%02d:%02d:%02d ' % (curr_time.tm_hour, curr_time.tm_min, curr_time.tm_sec))
-            print('輸出：%.2f %.2f %.2f %.2f' % (left_score, right_score, stop_score, other_score))
+            print('預測：%.2f %.2f %.2f %.2f' % (left_score, right_score, stop_score, other_score))
             print('類別：%s' % class_str)
+            print()
 
             # 顯示圖片
             if args.gui:

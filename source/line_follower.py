@@ -52,6 +52,7 @@ def main():
         middle_val = GPIO.input(IR_MIDDLE_PIN)
         left_val = GPIO.input(IR_LEFT_PIN)
         right_val = GPIO.input(IR_RIGHT_PIN)
+        print('光感:', left_val, middle_val, right_val)
 
         if middle_val:
             if left_val and right_val:        # 白白白
@@ -76,7 +77,7 @@ def main():
         while True:
             # advice 是 'left', 'right', 'stop', 'other' 之一
             advice = track_line()
-            print('advice', advice)
+            print('動作:', advice)
 
             if advice == 'left':
                 turn_left()
@@ -94,7 +95,7 @@ def main():
                 turn_left()
 
     except KeyboardInterrupt:
-        pass
+        print('使用者中斷')
 
     # 終止馬達
     pwm1.stop()

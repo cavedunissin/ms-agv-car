@@ -180,6 +180,7 @@ def main():
         middle_val = GPIO.input(IR_MIDDLE_PIN)
         left_val = GPIO.input(IR_LEFT_PIN)
         right_val = GPIO.input(IR_RIGHT_PIN)
+        print('光感:', left_val, middle_val, right_val)
 
         if middle_val:
             if left_val and right_val:        # 白白白
@@ -204,7 +205,7 @@ def main():
         while True:
             # advice 是 'left', 'right', 'stop', 'other' 之一
             advice = track_line()
-            print('advice', advice)
+            print('動作:', advice)
 
             if advice == 'left':
                 turn_left()
@@ -218,18 +219,18 @@ def main():
                 sign = recognize_image()
 
                 if sign == 'left':
-                    print('left sign')
+                    print('影像:', '左轉標誌')
                     left()
 
                 elif sign == 'right':
-                    print('right sign')
+                    print('影像:', '右轉標誌')
                     right()
 
                 elif sign == 'stop':
-                    print('stop sign')
+                    print('影像:', '停止標誌')
 
                 elif sign == 'other':
-                    print('no sign')
+                    print('影像:', '無標誌')
 
             elif advice == 'forward':
                 forward()
@@ -238,7 +239,7 @@ def main():
                 turn_left()
 
     except KeyboardInterrupt:
-        pass
+        print('使用者中斷')
 
     # 終止馬達
     pwm1.stop()
