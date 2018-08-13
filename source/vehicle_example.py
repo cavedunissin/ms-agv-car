@@ -205,15 +205,17 @@ def main():
         while True:
             # advice 是 'left', 'right', 'stop', 'other' 之一
             advice = track_line()
-            print('動作:', advice)
 
             if advice == 'left':
+                print('動作:', '左轉')
                 turn_left()
 
             elif advice == 'right':
+                print('動作:', '右轉')
                 turn_right()
 
             elif advice == 'stop':
+                print('動作:', '停止')
                 stop()
 
                 sign = recognize_image()
@@ -233,9 +235,11 @@ def main():
                     print('影像:', '無標誌')
 
             elif advice == 'forward':
+                print('動作:', '前進')
                 forward()
 
             elif advice == 'stall':
+                print('動作:', '左轉')
                 turn_left()
 
     except KeyboardInterrupt:
