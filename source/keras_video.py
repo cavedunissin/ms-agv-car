@@ -72,11 +72,12 @@ def main():
     # 主迴圈
     try:
         while True:
+            # 抓取原始圖片
             ret, orig_image = video_dev.read()
             curr_time = time.localtime()
 
             # 檢查串流是否結束
-            if ret is None:
+            if ret is None or orig_image is None:
                 break
 
             # 縮放爲模型輸入的維度、調整數字範圍爲 0～1 之間的數值

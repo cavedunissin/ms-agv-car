@@ -90,6 +90,9 @@ def main():
         result_onehot = model.predict(batch)
         class_id = np.argmax(result_onehot, axis=1)[0]
 
+        left_score, right_score, stop_score, other_score = result_onehot[0]
+        print('預測：%.2f %.2f %.2f %.2f' % (left_score, right_score, stop_score, other_score))
+
         # print(result_onehot)
         if class_id == 0:
             return 'left'
