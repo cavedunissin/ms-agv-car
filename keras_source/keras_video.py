@@ -71,8 +71,9 @@ def main():
 
     # 主迴圈
     try:
+        prev_timestamp = time.time()
+
         while True:
-            # 抓取原始圖片
             ret, orig_image = video_dev.read()
             curr_time = time.localtime()
 
@@ -102,10 +103,15 @@ def main():
             elif class_id == 3:
                 class_str = 'other'
 
+            # 計算執行時間
+            recent_timestamp = time.time()
+            period = recent_timestamp - prev_timestamp
+            prev_timestamp = recent_timestamp
 
             print('時間：%02d:%02d:%02d ' % (curr_time.tm_hour, curr_time.tm_min, curr_time.tm_sec))
-            print('預測：%.2f %.2f %.2f %.2f' % (left_score, right_score, stop_score, other_score))
+            print('輸出：%.2f %.2f %.2f %.2f' % (left_score, right_score, stop_score, other_score))
             print('類別：%s' % class_str)
+            print('費時：%f' % period)
             print()
 
             # 顯示圖片

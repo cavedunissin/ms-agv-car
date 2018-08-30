@@ -83,6 +83,7 @@ def main():
         ).astype(np.float32)
         normalized_image = resized_image / 255.0
 
+        # 執行預測
         batch = normalized_image.reshape(1, args.input_height, args.input_width, 3)
         result_onehot = model.predict(batch)
         class_id = np.argmax(result_onehot, axis=1)[0]
@@ -249,6 +250,9 @@ def main():
     # 終止馬達
     pwm1.stop()
     pwm2.stop()
+
+    # 終止影像裝置
+    video_dev.release()
 
 
 if __name__  == '__main__':
