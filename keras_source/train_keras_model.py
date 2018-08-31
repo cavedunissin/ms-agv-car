@@ -19,43 +19,26 @@ from keras.applications.mobilenetv2 import MobileNetV2
 
 
 def custom_model(input_shape, n_classes):
+
+    def conv_block(x, filters):
+        x = BatchNormalization() (x)
+        x = Conv2D(filters, (3, 3), activation='relu', padding='same') (x)
+
+        x = BatchNormalization() (x)
+        shortcut = x
+        x = Conv2D(filters, (3, 3), activation='relu', padding='same') (x)
+        x = Add() ([x, shortcut])
+        x = MaxPool2D((2, 2), strides=(2, 2)) (x)
+
+        return x
+
     input_tensor = Input(shape=input_shape)
 
-    x = BatchNormalization() (input_tensor)
-    x = Conv2D(32, (3, 3), activation='relu', padding='same') (x)
-
-    x = BatchNormalization() (x)
-    shortcut = x
-    x = Conv2D(32, (3, 3), activation='relu', padding='same') (x)
-    x = Add() ([x, shortcut])
-    x = MaxPool2D((2, 2), strides=(2, 2)) (x)
-
-    x = BatchNormalization() (x)
-    x = Conv2D(64, (3, 3), activation='relu', padding='same') (x)
-
-    x = BatchNormalization() (x)
-    shortcut = x
-    x = Conv2D(64, (3, 3), activation='relu', padding='same') (x)
-    x = Add() ([x, shortcut])
-    x = MaxPool2D((2, 2), strides=(2, 2)) (x)
-
-    x = BatchNormalization() (x)
-    x = Conv2D(128, (3, 3), activation='relu', padding='same') (x)
-
-    x = BatchNormalization() (x)
-    shortcut = x
-    x = Conv2D(128, (3, 3), activation='relu', padding='same') (x)
-    x = Add() ([x, shortcut])
-    x = MaxPool2D((2, 2), strides=(2, 2)) (x)
-
-    x = BatchNormalization() (x)
-    x = Conv2D(256, (3, 3), activation='relu', padding='same') (x)
-
-    x = BatchNormalization() (x)
-    shortcut = x
-    x = Conv2D(256, (3, 3), activation='relu', padding='same') (x)
-    x = Add() ([x, shortcut])
-    x = MaxPool2D((2, 2), strides=(2, 2)) (x)
+    x = conv_block(input_tensor, 32)
+    x = conv_block(x, 64)
+    x = conv_block(x, 128)
+    x = conv_block(x, 256)
+    x = conv_block(x, 512)
 
     x = Flatten() (x)
     x = BatchNormalization() (x)
@@ -97,7 +80,7 @@ def main():
     arg_parser.add_argument(
         '--epochs',
         type=int,
-        default=64,
+        default=32,
         help='訓練回合數',
     )
     arg_parser.add_argument(
@@ -108,13 +91,13 @@ def main():
     arg_parser.add_argument(
         '--input-width',
         type=int,
-        default=30,
+        default=48,
         help='模型輸入寬度',
     )
     arg_parser.add_argument(
         '--input-height',
         type=int,
-        default=30,
+        default=48,
         help='模型輸入高度',
     )
     arg_parser.add_argument(

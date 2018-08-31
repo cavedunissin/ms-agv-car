@@ -29,13 +29,13 @@ def main():
     arg_parser.add_argument(
         '--input-width',
         type=int,
-        default=30,
+        default=48,
         help='模型輸入影像寬度',
     )
     arg_parser.add_argument(
         '--input-height',
         type=int,
-        default=30,
+        default=48,
         help='模型輸入影像高度',
     )
 

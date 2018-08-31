@@ -138,6 +138,7 @@ def custom_model_fn(features, labels, mode, params):
     x = conv_block(x, 64)
     x = conv_block(x, 128)
     x = conv_block(x, 256)
+    x = conv_block(x, 512)
 
     # 最終區塊
     x = tf.layers.flatten(x)
@@ -256,13 +257,13 @@ def main():
     arg_parser.add_argument(
         '--input-width',
         type=int,
-        default=30,
+        default=48,
         help='模型輸入寬度',
     )
     arg_parser.add_argument(
         '--input-height',
         type=int,
-        default=30,
+        default=48,
         help='模型輸入高度',
     )
     arg_parser.add_argument(
