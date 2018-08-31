@@ -120,11 +120,11 @@ def main():
         pwm1.ChangeDutyCycle(DUTY_CYCLE)
         pwm2.ChangeDutyCycle(DUTY_CYCLE)
 
-    def turn_left():
+    def head_left():
         pwm1.ChangeDutyCycle(DUTY_CYCLE)
         pwm2.ChangeDutyCycle(0)
 
-    def turn_right():
+    def head_right():
         pwm1.ChangeDutyCycle(0)
         pwm2.ChangeDutyCycle(DUTY_CYCLE)
 
@@ -132,65 +132,43 @@ def main():
         pwm1.ChangeDutyCycle(0)
         pwm2.ChangeDutyCycle(0)
 
-    def right():
-        duty = 100
+    def cross_left():
+        time.sleep(1)
+
+        pwm1.ChangeDutyCycle(100)
+        pwm2.ChangeDutyCycle(0)
+        time.sleep(0.35)
+
+        pwm1.ChangeDutyCycle(0)
+        pwm2.ChangeDutyCycle(0)
+        time.sleep(1)
+
+        pwm1.ChangeDutyCycle(100)
+        pwm2.ChangeDutyCycle(100)
+        time.sleep(1)
 
         pwm1.ChangeDutyCycle(0)
         pwm2.ChangeDutyCycle(0)
         time.sleep(0.5)
 
-        pwm1.ChangeDutyCycle(0)
-        pwm2.ChangeDutyCycle(duty)
-        time.sleep(0.2)
-
-        pwm1.ChangeDutyCycle(duty)
-        pwm2.ChangeDutyCycle(duty)
-        time.sleep(0.8)
+    def cross_right():
+        time.sleep(1)
 
         pwm1.ChangeDutyCycle(0)
-        pwm2.ChangeDutyCycle(0)
-        time.sleep(0.5)
-
-        pwm1.ChangeDutyCycle(0)
-        pwm2.ChangeDutyCycle(duty)
-        time.sleep(0.7)
-
-        pwm1.ChangeDutyCycle(duty)
-        pwm2.ChangeDutyCycle(duty)
-        time.sleep(0.2)
+        pwm2.ChangeDutyCycle(100)
+        time.sleep(0.35)
 
         pwm1.ChangeDutyCycle(0)
         pwm2.ChangeDutyCycle(0)
+        time.sleep(1)
 
-    def left():
-        duty = 100
+        pwm1.ChangeDutyCycle(100)
+        pwm2.ChangeDutyCycle(100)
+        time.sleep(1)
 
         pwm1.ChangeDutyCycle(0)
         pwm2.ChangeDutyCycle(0)
         time.sleep(0.5)
-
-        pwm1.ChangeDutyCycle(duty)
-        pwm2.ChangeDutyCycle(0)
-        time.sleep(0.2)
-
-        pwm1.ChangeDutyCycle(duty)
-        pwm2.ChangeDutyCycle(duty)
-        time.sleep(0.8)
-
-        pwm1.ChangeDutyCycle(0)
-        pwm2.ChangeDutyCycle(0)
-        time.sleep(0.5)
-
-        pwm1.ChangeDutyCycle(duty)
-        pwm2.ChangeDutyCycle(0)
-        time.sleep(0.7)
-
-        pwm1.ChangeDutyCycle(duty)
-        pwm2.ChangeDutyCycle(duty)
-        time.sleep(0.2)
-
-        pwm1.ChangeDutyCycle(0)
-        pwm2.ChangeDutyCycle(0)
 
     def track_line():
         middle_val = GPIO.input(IR_MIDDLE_PIN)
@@ -223,11 +201,11 @@ def main():
 
             if advice == 'left':
                 print('動作:', '左轉')
-                turn_left()
+                head_left()
 
             elif advice == 'right':
                 print('動作:', '右轉')
-                turn_right()
+                head_right()
 
             elif advice == 'stop':
                 print('動作:', '停止')
@@ -237,11 +215,11 @@ def main():
 
                 if sign == 'left':
                     print('影像:', '左轉標誌')
-                    left()
+                    cross_left()
 
                 elif sign == 'right':
                     print('影像:', '右轉標誌')
-                    right()
+                    cross_right()
 
                 elif sign == 'stop':
                     print('影像:', '停止標誌')
@@ -255,7 +233,7 @@ def main():
 
             elif advice == 'stall':
                 print('動作:', '左轉')
-                turn_left()
+                head_left()
 
             print()
 
